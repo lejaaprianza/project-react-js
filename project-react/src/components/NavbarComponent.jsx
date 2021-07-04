@@ -31,7 +31,9 @@ const NavbarComponent = (props) => {
                 <NavLink href="/components/">About Us</NavLink>
               </NavItem>
             </Nav>
-            <NavbarText>Simple Text</NavbarText>
+            <div>
+              <NavbarText>Simple Text</NavbarText>
+            </div>
           </Collapse>
         </Container>
       </Navbar>
