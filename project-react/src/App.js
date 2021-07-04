@@ -14,18 +14,10 @@ export default class App extends Component {
         <NavbarComponent />
         <JumbotronComponent />
         <BrowserRouter>
-          <Route path="/" exact>
-            <HomeContainer />
-          </Route>
-          <Route path="/create" exact>
-            <CreateUserContainer />
-          </Route>
-          <Route path="/edit/:id">
-            <EditUserContainer />
-          </Route>
-          <Route path="/detail/:id">
-            <DetailUserContainer />
-          </Route>
+          <Route component={HomeContainer} path="/" exact />
+          <Route component={CreateUserContainer} path="/create" exact />
+          <Route component={EditUserContainer} path="/edit/:id" exact />
+          <Route component={DetailUserContainer} path="/detail/:id" exact />
         </BrowserRouter>
       </div>
     );
