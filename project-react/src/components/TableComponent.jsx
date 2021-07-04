@@ -12,6 +12,7 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { Spinner } from "reactstrap";
 
 const { SearchBar } = Search;
 
@@ -70,47 +71,54 @@ const defaultSorted = [
 
 const mapStateToProps = (state) => {
   return {
-    users: state.users.users,
+    getUsersList: state.users.getUsersList,
+    errorUsersList: state.users.errorUsersList,
   };
 };
 
 const TableComponent = (props) => {
   return (
     <Container>
-      <ToolkitProvider
-        bootstrap4
-        keyField="id"
-        data={props.users}
-        columns={columns}
-        search
-        defaultSorted={defaultSorted}
-      >
-        {(props) => (
-          <div>
-            <Row>
-              <Col>
-                <Link to={"/create"}>
-                  <Button color="dark" className="mr-2">
-                    <FontAwesomeIcon icon={faUserPlus} /> Create User
-                  </Button>
-                </Link>
-              </Col>
-              <Col>
-                <div className="mb-2 d-flex justify-content-end">
-                  <SearchBar {...props.searchProps} placeholder="Search..." />
-                </div>
-              </Col>
-            </Row>
-
+      {props.getUsersList ? (
+        <ToolkitProvider
+          bootstrap4
+          keyField="id"
+          data={props.getUsersList}
+          columns={columns}
+          search
+          defaultSorted={defaultSorted}
+        >
+          {(props) => (
             <div>
-              <BootstrapTable
-                {...props.baseProps}
-                pagination={paginationFactory()}
-              />
+              <Row>
+                <Col>
+                  <Link to={"/create"}>
+                    <Button color="dark" className="mr-2">
+                      <FontAwesomeIcon icon={faUserPlus} /> Create User
+                    </Button>
+                  </Link>
+                </Col>
+                <Col>
+                  <div className="mb-2 d-flex justify-content-end">
+                    <SearchBar {...props.searchProps} placeholder="Search..." />
+                  </div>
+                </Col>
+              </Row>
+
+              <div>
+                <BootstrapTable
+                  {...props.baseProps}
+                  pagination={paginationFactory()}
+                />
+              </div>
             </div>
-          </div>
-        )}
-      </ToolkitProvider>
+          )}
+        </ToolkitProvider>
+      ) : (
+        <div className="text-center">
+          {props.errorUsersList ? <h1>{props.errorUsersList}</h1> : <Spinner />}
+        </div>
+      )}
     </Container>
   );
 };
