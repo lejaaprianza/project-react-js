@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
 const { SearchBar } = Search;
 
 const columns = [
@@ -66,6 +68,12 @@ const defaultSorted = [
   },
 ];
 
+const mapStateToProps = (state) => {
+  return {
+    users: state.users.users,
+  };
+};
+
 const TableComponent = (props) => {
   return (
     <Container>
@@ -107,4 +115,4 @@ const TableComponent = (props) => {
   );
 };
 
-export default TableComponent;
+export default connect(mapStateToProps, null)(TableComponent);
