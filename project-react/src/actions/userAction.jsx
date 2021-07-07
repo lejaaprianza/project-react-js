@@ -116,6 +116,24 @@ export const putUserUpdate = (data, id) => {
   };
 };
 
+export const deleteUser = (id) => {
+  return (dispatch) => {
+    axios
+      .delete(
+        "https://my-json-server.typicode.com/lejaaprianza/project-react-js/users/" +
+          id
+      )
+      .then(function (response) {
+        console.log(response);
+        // handle success
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error.response.status);
+      });
+  };
+};
+
 export const deleteDataUser = () => {
   return (dispatch) => {
     dispatch({
